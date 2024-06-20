@@ -16,12 +16,6 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// app.use(logger)
-
-// app.use('/',(req, res) => {
-//     res.status(200).json({ message: 'Welcome to my API!' });
-// });
-
 app.use('/', homeRoute)
 app.use('/home', homeRoute)
 
