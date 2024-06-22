@@ -5,7 +5,6 @@ import homeRoute from './routes/homeRoute.js';
 import goalRoute from './routes/goalRoute.js';
 import userRoute from './routes/userRoute.js';
 import cookieParser from 'cookie-parser';
-
 // import logger from './middleware/logger.js';
 
 const PORT = process.env.PORT || 8000;
@@ -25,15 +24,19 @@ app.use('/', homeRoute)
 app.use('/home', homeRoute)
 app.use('/api/goals', goalRoute)
 app.use('/api/users', userRoute)
-app.all('*', (req, res) => {
-  res.status(404).send('<h1>404! Page not found</h1>');
+app.all('*', (_req, res) => {
+  res.status(404).json({
+    message: 'Page not found',
+    documentation_url: 'https:/nmdra.github.io/restful-api',
+    statusCode: 404,
+  });
 });
 
 app.use(errorMiddleware);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 }).on('error', (error) => {
-    console.error(`Error starting server: ${error.message}`);
+  console.error(`Error starting server: ${error.message}`);
 });
 

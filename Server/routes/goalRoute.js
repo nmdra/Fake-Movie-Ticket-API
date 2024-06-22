@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.route('/').get(goal.getAllGoals).post(goal.addGoal)
 router.route('/:id').get(goal.getGoal)
-                    .put(goal.updateGoal)
-                    .patch(goal.updateGoal)
-                    .delete(goal.deleteGoal)
+    .put(goal.updateGoal)
+    .patch(goal.updateGoal)
+    .delete(goal.deleteGoal)
 
 export default router;

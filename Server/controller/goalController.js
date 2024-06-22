@@ -30,7 +30,7 @@ export const getGoal = async (req, res, next) => {
 
         res.status(200).json(goal);
     } catch (error) {
-            next(error); // Pass other errors to the error-handling middleware
+        next(error); // Pass other errors to the error-handling middleware
     }
 };
 

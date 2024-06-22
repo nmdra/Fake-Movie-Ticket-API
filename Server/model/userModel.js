@@ -9,12 +9,25 @@ const userSchema = new mongoose.Schema(
         },
         email: {
             type: String,
-            required: true,
-            unique: true
+            lowercase: true,
+            required: [true, "Email not Provided`"],
+            unique: [true, "Email already exists"],
+            validate: {
+                validator: function (v) {
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+                },
+                message: '{VALUE} is not a valid email!'
+            }
+        },
+        role: {
+            type: String,
+            lowercase: true,
+            enum: ["regular", "vip", "admin"],
+            required: [true, "Please specify user role"]
         },
         password: {
             type: String,
-            required: true
+            required: [true, "Password not provided"]
         },
     },
 
@@ -37,7 +50,7 @@ userSchema.pre('save', async function (next) {
 })
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+    return await bcrypt.compare(enteredPassword, this.password);
 };
 
 const User = mongoose.model("User", userSchema);
