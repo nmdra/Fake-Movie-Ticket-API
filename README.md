@@ -147,3 +147,11 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 Feel free to contribute to this project by submitting issues or pull requests. For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+<div align="center">
+  <a href="https://nmdra.github.io"> 🌎 nmdra.github.io</a> |
+  <a href="https://github.com/nmdra"> 👨‍💻 Github</a> |
+  <a href="https://twitter.com/nimendra_"> 🐦 Twitter</a>
+</div>
