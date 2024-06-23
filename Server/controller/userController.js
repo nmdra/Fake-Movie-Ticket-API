@@ -4,7 +4,7 @@ import generateToken from '../utils/generateToken.js';
 
 export const registerUser = async (req, res, next) => {
 
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body;
 
     try {
         // Validate required fields
@@ -20,7 +20,7 @@ export const registerUser = async (req, res, next) => {
         }
 
         // Create a new user
-        const user = await User.create({ name, email, password, role });
+        const user = await User.create({ name, email, password });
 
         if (user) {
             generateToken(res, user._id);
@@ -28,7 +28,7 @@ export const registerUser = async (req, res, next) => {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
-                role: user.role
+                // role: user.role
             });
         } else {
             throw new CustomError('User creation failed', 500);
@@ -52,7 +52,6 @@ export const getUserProfile = async (req, res, next) => {
         next(error);
     }
 };
-
 
 export const authUser = async (req, res, next) => {
     const { email, password } = req.body;
@@ -94,7 +93,7 @@ export const updateUserProfile = async (req, res, next) => {
         if (user) {
             user.name = req.body.name || user.name;
             user.email = req.body.email || user.email;
-            user.role = req.body.role || user.role;
+            // user.role = user.role;
 
             if (req.body.password) {
                 user.password = req.body.password;
@@ -146,3 +145,17 @@ export const getUserById = async (req, res, next) => {
         next(error);
     }
 };
+
+export const deleteUserById = async (req, res, next) => {
+    try {
+        // cast
+        // if (req.user._id !== req.params.id) throw new CustomError('Unauthorized access', 403); // Only the user himself or
+
+        await User.findByIdAndDelete(req.user._id);
+
+        res.status(200).json({ message: 'User deleted successfully' });
+    } catch (error) {
+        next(error);
+    }
+};
+

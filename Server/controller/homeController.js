@@ -1,7 +1,7 @@
 export const homePage = (_req, res) => {
     res.status(200).json({
         message: 'Welcome to Demo REST API! Here are the available endpoints',
-        version: '1.0.0',
+        version: '1.1.0',
         author: 'Nimendra',
         license: 'MIT',
         github: 'https://github.com/nmdra',
@@ -35,6 +35,21 @@ export const homePage = (_req, res) => {
                 method: 'PUT',
                 endpoint: '/api/users/profile',
                 description: 'Update user profile',
+            },
+            {
+                method: 'DELETE',
+                endpoint: '/api/users/delete',
+                description: 'Delete user',
+            },
+            {
+                method: 'GET',
+                endpoint: '/api/movies/',
+                description: 'Get All Movies'
+            },           
+            {
+                method: 'GET',
+                endpoint: '/api/movies/:imdbId',
+                description: 'Get Movie By IMDb ID'
             }
         ]
     });
