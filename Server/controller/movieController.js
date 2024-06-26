@@ -30,7 +30,10 @@ export const addMovie = async (req, res, next) => {
 // Get all movies
 export const getAllMovies = async (req, res, next) => {
     try {
-        const movies = await Movie.find(); // Fetch all movies from the database
+        const limit = parseInt(req.query.limit, 10) || 10; 
+        const skip = parseInt(req.query.skip, 10) || 0;
+
+        const movies = await Movie.find().limit(limit).skip(skip); // Fetch all movies from the database
         res.status(200).json(movies); // Respond with the list of movies
     } catch (error) {
         next(error); // Pass any errors to the error handling middleware
