@@ -1,0 +1,35 @@
+name: Formatter
+
+run-name: Run Formatters by @${{ github.actor }}
+
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: 
+        - dev
+  pull_request:
+    branches: 
+        - dev 
+  workflow_dispatch:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Server
+    name: Format Files
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Prettier
+        run: npx prettier --write **/*.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+        with:
+          commit_message: "style: format files"
