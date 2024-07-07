@@ -1,4 +1,4 @@
-import express from 'express';
+import express from 'express'
 import {
     registerUser,
     getUserProfile,
@@ -6,19 +6,22 @@ import {
     logoutUser,
     updateUserProfile,
     getUserById,
-    deleteUserById
-} from '../controller/userController.js';
-import protect from '../middleware/authMiddleware.js';
+    deleteUserById,
+} from '../controller/userController.js'
+import protect from '../middleware/authMiddleware.js'
 
-const router = express.Router();
+const router = express.Router()
 
-router.route('/register').post(registerUser);
-router.route('/profile').get(protect, getUserProfile).put(protect, updateUserProfile);
-router.route('/auth').post(authUser);
-router.route('/logout').post(protect, logoutUser);
-router.route('/update').put(protect, updateUserProfile);
+router.route('/register').post(registerUser)
+router
+    .route('/profile')
+    .get(protect, getUserProfile)
+    .put(protect, updateUserProfile)
+router.route('/auth').post(authUser)
+router.route('/logout').post(protect, logoutUser)
+router.route('/update').put(protect, updateUserProfile)
 
-router.route('/delete').delete(protect, deleteUserById);
-router.route('/:id').get(protect, getUserById); // admin only
+router.route('/delete').delete(protect, deleteUserById)
+router.route('/:id').get(protect, getUserById) // admin only
 
-export default router;
+export default router

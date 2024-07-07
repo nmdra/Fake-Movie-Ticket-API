@@ -44,13 +44,13 @@ export const homePage = (_req, res) => {
             {
                 method: 'GET',
                 endpoint: '/api/movies/limit:limit&skip:skip',
-                description: 'Get All Movies with Pagination'
-            },           
+                description: 'Get All Movies with Pagination',
+            },
             {
                 method: 'GET',
                 endpoint: '/api/movies/:imdbId',
-                description: 'Get Movie By IMDb ID'
-            }
-        ]
-    });
-};
+                description: 'Get Movie By IMDb ID',
+            },
+        ],
+    })
+}
