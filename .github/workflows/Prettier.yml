@@ -34,7 +34,26 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+    #   - uses: stefanzweifel/git-auto-commit-action@v4
+    #     if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+    #     with:
+    #       commit_message: "style: format files"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
         with:
-          commit_message: "style: format files"
+          commit-message: "style: Format code using Prettier" 
+          committer: Formatter[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: Format
+          delete-branch: true
+          title: 'Apply Code Formatting with Prettier'
+          labels: |
+            format
+            automated pr
+          assignees: nmdra
+          reviewers: nmdra
+        #   team-reviewers: |
+        #   milestone: 1
+        #   draft: false
