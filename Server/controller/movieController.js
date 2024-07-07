@@ -30,7 +30,10 @@ export const addMovie = async (req, res, next) => {
 // Get all movies
 export const getAllMovies = async (req, res, next) => {
     try {
-        const movies = await Movie.find(); // Fetch all movies from the database
+        const limit = parseInt(req.query.limit, 10) || 10;
+        const skip = parseInt(req.query.skip, 10) || 0;
+
+        const movies = await Movie.find().limit(limit).skip(skip); // Fetch all movies from the database
         res.status(200).json(movies); // Respond with the list of movies
     } catch (error) {
         next(error); // Pass any errors to the error handling middleware
@@ -53,3 +56,25 @@ export const getMovieByImdbId = async (req, res, next) => {
         next(error); // Pass any errors to the error handling middleware
     }
 };
+
+export const movieSearch = async (req, res, next) => {
+    const title = req.query.title;
+
+    try {
+        if (!title) {
+            throw new CustomError('Search query is required', 400);
+        }
+
+        const movies = await Movie.find({ title: { $regex: title, $options: 'i' } });
+
+        if (!movies || movies.length === 0) {
+            res.status(404).json({ message: 'No movies found' })
+            return;
+        }
+
+        res.status(200).json(movies);
+
+    } catch (error) {
+        next(error);
+    }
+}; 

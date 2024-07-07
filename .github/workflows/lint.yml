@@ -1,0 +1,52 @@
+# This is a basic workflow to help you get started with Actions
+name: linter
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: 
+        - master
+        - dev
+  pull_request:
+    branches: 
+        - master
+# Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Server
+# Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Node Dependencies
+        run: npm ci
+    #   - name: Lint
+    #     run: npm run lint
+    #     continue-on-error: true
+      - name: Save Code Linting Report JSON
+        run: npm run lintj
+        continue-on-error: true
+      - name: Annotate Code Linting Results
+        uses: ataylorme/eslint-annotate-action@v3
+        if: always()
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          report-json: "Server/eslint_report.json"
+          markdown-report-on-step-summary: true
+    #     continue-on-error: true
+    #   - name: Upload ESLint report
+    #     uses: actions/upload-artifact@v4
+    #     with:
+    #       name: eslint_report.json
+    #       path: Server/eslint_report.json
+    #       retention-days: 5

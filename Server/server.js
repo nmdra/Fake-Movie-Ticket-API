@@ -6,6 +6,7 @@ import errorMiddleware from './middleware/errorMiddleware.js';
 import homeRoute from './routes/homeRoute.js';
 import userRoute from './routes/userRoute.js';
 import movieRoute from './routes/movieRoute.js';
+import ticketRoutes from './routes/ticketRoute.js';
 // import logger from './middleware/logger.js';
 
 const PORT = process.env.PORT || 8000;
@@ -27,6 +28,7 @@ app.use('/', homeRoute)
 app.use('/home', homeRoute)
 app.use('/api/users', userRoute)
 app.use('/api/movies', movieRoute)
+app.use('/api/tickets', ticketRoutes);
 
 app.all('*', (_req, res) => {
   res.status(404).json({

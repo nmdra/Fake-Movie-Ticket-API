@@ -36,6 +36,8 @@ const movieSchema = new mongoose.Schema(
     }
 );
 
+movieSchema.index({ title: 'text' });
+
 // Create Movie model
 const Movie = mongoose.model('Movie', movieSchema);
 
