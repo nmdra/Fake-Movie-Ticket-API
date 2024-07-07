@@ -30,10 +30,11 @@ jobs:
           node-version: '22'
       - name: Install Node Dependencies
         run: npm ci
-        env:
-            CI: true
-      - name: Save Code Linting Report JSON
+      - name: Lint
         run: npm run lint
+        continue-on-error: true
+      - name: Save Code Linting Report JSON
+        run: npm run lintj
         continue-on-error: true
       - name: Annotate Code Linting Results
         uses: ataylorme/eslint-annotate-action@v3
