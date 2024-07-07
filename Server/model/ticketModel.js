@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 // Define ticket schema
 const ticketSchema = new mongoose.Schema(
@@ -6,7 +6,7 @@ const ticketSchema = new mongoose.Schema(
         userId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
-            required: [true, 'User ID is required']
+            required: [true, 'User ID is required'],
         },
         movieId: {
             type: mongoose.Schema.Types.ObjectId,
