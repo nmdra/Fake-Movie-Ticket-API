@@ -31,17 +31,19 @@ app.use('/api/movies', movieRoute)
 app.use('/api/tickets', ticketRoutes)
 
 app.all('*', (_req, res) => {
-    res.status(404).json({
-        message: 'Page not found',
-        documentation_url: 'https:/nmdra.github.io/restful-api',
-        statusCode: 404,
-    })
+  res.status(404).json({
+    message: 'Page not found',
+    documentation_url: 'https:/nmdra.github.io/restful-api',
+    statusCode: 404,
+  })
 })
 
 app.use(errorMiddleware)
 
-app.listen(PORT, () => {
+app
+  .listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
-}).on('error', (error) => {
+  })
+  .on('error', (error) => {
     console.error(`Error starting server: ${error.message}`)
-})
+  })

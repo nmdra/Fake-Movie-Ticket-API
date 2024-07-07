@@ -12,6 +12,11 @@ on:
         - dev 
   workflow_dispatch:
 
+  workflow_run:
+    workflows: [Linter]
+    types:
+      - completed
+
 jobs:
   format:
     runs-on: ubuntu-latest

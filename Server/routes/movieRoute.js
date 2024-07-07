@@ -1,10 +1,10 @@
 import express from 'express'
 import apicache from 'apicache'
 import {
-    addMovie,
-    getAllMovies,
-    getMovieByImdbId,
-    movieSearch,
+  addMovie,
+  getAllMovies,
+  getMovieByImdbId,
+  movieSearch,
 } from '../controller/movieController.js'
 import protect from '../middleware/authMiddleware.js'
 
