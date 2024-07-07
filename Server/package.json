@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon --verbose --env-file=.env server.js",
-    "watch": "node --watch --env-file=.env server"
+    "watch": "node --watch --env-file=.env server",
+    "lint": "eslint --fix ."
   },
   "author": "Nimendra",
   "license": "MIT",
