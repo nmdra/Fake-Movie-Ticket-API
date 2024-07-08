@@ -1,0 +1,58 @@
+name: Formatter
+
+run-name: Run Formatters by @${{ github.actor }}
+
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  workflow_run:
+    workflows: [Linter]
+    types:
+      - completed
+  workflow_dispatch:
+  push:
+    branches: 
+        - dev
+  pull_request:
+    branches: 
+        - dev 
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Server
+    name: Format Files
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Prettier
+        run: npx prettier --write **/*.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    #   - uses: stefanzweifel/git-auto-commit-action@v5
+    #     if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+    #     with:
+    #       commit_message: "style: format files"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "style: Format code using Prettier" 
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: Format
+          delete-branch: true
+          title: 'Apply Code Formatting with Prettier'
+          labels: |
+            format
+            automated pr
+          assignees: nmdra
+          reviewers: nmdra
+        #   team-reviewers: |
+        #   milestone: 1
+        #   draft: false

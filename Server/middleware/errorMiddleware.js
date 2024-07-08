@@ -1,7 +1,7 @@
 const errorMiddleware = (error, req, res, next) => {
-    const statusCode = error.statusCode ? error.statusCode : 500;
+    const statusCode = error.statusCode ? error.statusCode : 500
 
-    let response;
+    let response
 
     if (process.env.NODE_ENV === 'dev') {
         response = {
@@ -9,19 +9,19 @@ const errorMiddleware = (error, req, res, next) => {
             statusCode,
             method: req.method,
             requestUrl: req.originalUrl,
-            stack: error.stack
+            stack: error.stack,
         }
     } else {
         response = {
-            message: error.message
-        };
+            message: error.message,
+        }
     }
 
-    res.status(statusCode).json(response);
+    res.status(statusCode).json(response)
 
-    next();
+    next()
 }
 
-export default errorMiddleware;
+export default errorMiddleware
 
 // https://expressjs.com/en/guide/error-handling.html

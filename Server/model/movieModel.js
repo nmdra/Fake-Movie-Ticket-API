@@ -1,45 +1,44 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 // Define showtime schema
 const showtimeSchema = new mongoose.Schema({
     time: {
         type: Date,
-        required: true
+        required: true,
     },
     screen: {
         type: Number,
-        required: true
-    }
-});
+        required: true,
+    },
+})
 
 // Define movie schema using showtime schema
 const movieSchema = new mongoose.Schema(
     {
         title: {
             type: String,
-            required: [true, "title is required"],
+            required: [true, 'title is required'],
         },
         imdbId: {
             type: String,
-            required: [true, "imdbId is required"],
-            unique: [true, "imdbId must be unique"]
+            required: [true, 'imdbId is required'],
+            unique: [true, 'imdbId must be unique'],
         },
         showtimes: [showtimeSchema], // Embedding showtime schema
         posterImage: {
             type: String,
-            default: "",
-            required: false
-        }
+            default: '',
+            required: false,
+        },
     },
     {
-        timestamps: true
+        timestamps: true,
     }
-);
+)
 
-movieSchema.index({ title: 'text' });
+movieSchema.index({ title: 'text' })
 
 // Create Movie model
-const Movie = mongoose.model('Movie', movieSchema);
+const Movie = mongoose.model('Movie', movieSchema)
 
-export default Movie;
-
+export default Movie

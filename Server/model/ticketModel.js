@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 // Define ticket schema
 const ticketSchema = new mongoose.Schema(
@@ -6,55 +6,53 @@ const ticketSchema = new mongoose.Schema(
         userId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
-            required: [true, 'User ID is required']
+            required: [true, 'User ID is required'],
         },
         movieId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Movie',
-            required: [true, 'Movie ID is required']
+            required: [true, 'Movie ID is required'],
         },
         showtimes: {
             type: Date,
-            required: [true, 'Showtime is required']
+            required: [true, 'Showtime is required'],
         },
         seats: [
             {
                 row: {
                     type: Number,
-                    required: [true, 'Seat row is required']
+                    required: [true, 'Seat row is required'],
                 },
                 number: {
                     type: Number,
-                    required: [true, 'Seat number is required']
-                }
-            }
+                    required: [true, 'Seat number is required'],
+                },
+            },
         ],
         purchaseDate: {
             type: Date,
-            default: Date.now
+            default: Date.now,
         },
         price: {
             type: Number,
-            required: [true, 'Price is required']
+            required: [true, 'Price is required'],
         },
         paymentStatus: {
             type: String,
             enum: ['Paid', 'Pending'],
-            default: 'Pending'
+            default: 'Pending',
         },
         isRelease: {
             type: Boolean,
-            default: false
-        }
+            default: false,
+        },
     },
     {
-        timestamps: true
+        timestamps: true,
     }
-);
+)
 
 // Create Ticket model
-const Ticket = mongoose.model('Ticket', ticketSchema);
+const Ticket = mongoose.model('Ticket', ticketSchema)
 
-export default Ticket;
-
-  
+export default Ticket

@@ -1,15 +1,24 @@
 # Fake Movie Ticket API
 
+> [!WARNING]  
+> This repository is an experimental project for learning the MERN (MongoDB, Express, React, Node.js) stack.
+> Use at your own risk.
+
 This is a Node.js and Express-based API for managing movie data. The API allows users to add, fetch, update, and delete movie information, including showtimes and poster images. The data is stored in a MongoDB database using Mongoose as the ODM.
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Models](#models)
-- [Error Handling](#error-handling)
-- [License](#license)
+- [Fake Movie Ticket API](#fake-movie-ticket-api)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [API Endpoints](#api-endpoints)
+    - [Movies](#movies)
+  - [Models](#models)
+    - [Movie](#movie)
+    - [User](#user)
+  - [Error Handling](#error-handling)
+  - [License](#license)
 
 ## Installation
 
