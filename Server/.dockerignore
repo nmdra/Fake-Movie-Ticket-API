@@ -1,0 +1,7 @@
+.env.example
+.gitignore
+.eslint.config.mjs
+vercel.json
+prettier.config.mjs
+.vercel
+.node_modules
