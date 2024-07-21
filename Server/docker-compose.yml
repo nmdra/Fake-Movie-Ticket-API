@@ -1,0 +1,41 @@
+version: '0.2'  
+
+services:
+  server:
+    container_name: Movie-API-server
+    build: .
+    env_file: 
+      - .env
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - apidb
+    volumes:
+      - ./:/app
+      - node_modules:/app/node_modules
+    networks:
+      - api-networks
+
+  apidb:
+    image: mongo
+    container_name: Movie-API-db
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - api-networks
+
+volumes:
+  dbdata:
+  node_modules:
+
+networks:
+  api-networks:
+    driver: bridge
