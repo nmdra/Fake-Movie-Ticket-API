@@ -5,3 +5,5 @@ vercel.json
 prettier.config.mjs
 .vercel
 .node_modules
+docker-compose.yml
+Dockerfile
