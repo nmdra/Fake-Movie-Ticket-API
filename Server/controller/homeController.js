@@ -4,7 +4,7 @@ export const homePage = (_req, res) => {
         version: '1.2.0',
         author: 'Nimendra',
         license: 'MIT',
-        github: 'https://github.com/nmdra',
+        github: 'https://github.com/nmdra/rest-api',
         endpoints: [
             {
                 method: 'POST',

@@ -3,7 +3,7 @@ const errorMiddleware = (error, req, res, next) => {
 
     let response
 
-    if (process.env.NODE_ENV === 'dev') {
+    if (process.env.NODE_ENV === 'development') {
         response = {
             message: error.message,
             statusCode,
