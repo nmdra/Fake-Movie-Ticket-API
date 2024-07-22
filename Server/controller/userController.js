@@ -118,11 +118,11 @@ export const updateUserProfile = async (req, res, next) => {
 export const getUserById = async (req, res, next) => {
     // Ensure only admins can fetch user details
     try {
-    if (req.user.role !== 'admin') {
-        throw new CustomError('Unauthorized access', 403)
-    }
+        if (req.user.role !== 'admin') {
+            throw new CustomError('Unauthorized access', 403)
+        }
 
-    const userId = req.params.id // Assuming the user ID is passed as a parameter
+        const userId = req.params.id // Assuming the user ID is passed as a parameter
 
         const user = await User.findById(userId)
 
