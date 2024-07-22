@@ -1,20 +1,20 @@
-version: '0.2'  
-
 services:
   server:
+    image: nmdra/restapi
     container_name: Movie-API-server
     build: .
+    restart: on-failure
     env_file: 
       - .env
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
     ports:
       - "${PORT}:${PORT}"
     depends_on:
-      - apidb
+      - apidb 
     volumes:
       - ./:/app
-      - node_modules:/app/node_modules
+      - /app/node_modules
     networks:
       - api-networks
 
@@ -32,10 +32,26 @@ services:
     networks:
       - api-networks
 
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: "mongodb://${DB_USERNAME}:${DB_PASSWORD}@apidb:27017/mydatabase?authSource=admin"
+      ME_CONFIG_OPTIONS_EDITORTHEME: "ambiance"
+      ME_CONFIG_BASICAUTH_USERNAME: user
+      ME_CONFIG_BASICAUTH_PASSWORD: pass
+    depends_on:
+      - apidb
+    networks:
+      - api-networks
+
 volumes:
   dbdata:
-  node_modules:
 
 networks:
   api-networks:
+    name: api-networks
     driver: bridge

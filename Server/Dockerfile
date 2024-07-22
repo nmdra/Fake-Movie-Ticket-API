@@ -9,7 +9,7 @@ COPY package.json ./
 # COPY package-lock.json ./  # Uncomment if you have a package-lock.json file
 
 # Install production dependencies
-RUN npm install --omit=dev
+RUN npm install -g nodemon && npm install --omit=dev --verbose
 
 # Copy the rest of the application code to the working directory
 COPY . .
@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 3000
 
 # Define the command to run the application
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "dev" ]

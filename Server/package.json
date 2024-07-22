@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node --env-file=.env server.js",
-    "dev": "nodemon --verbose --env-file=.env server.js",
+    "dev": "nodemon -L --verbose --env-file=.env server.js",
     "watch": "node --watch --env-file=.env server",
     "lintj": "eslint --output-file eslint_report.json --format json .",
     "lint": "eslint ",
